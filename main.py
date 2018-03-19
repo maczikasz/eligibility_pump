@@ -17,11 +17,11 @@ from world.env import environment
 
 TF, KERAS, TF_DOUBLE = ("tf", "keras", "tf_double")
 
-parser = argparse.ArgumentParser(description='Run self driving car AI.')
+parser = argparse.ArgumentParser(description='Run Pump AI.')
 parser.add_argument('-im', help='(im = implement) - Select implementation to run', choices=[TF, KERAS, TF_DOUBLE])
 parser.add_argument('-sb', help='(sb = Start Brain) - Name of brain to start with, from saves/brains')
 parser.add_argument('-eb', help='(eb = End Brain) - Name of brain to write to after the iterations are done, from saves/brains')
-parser.add_argument('-en', type=int, help='(en = eligibility n) - How many steps should eligiblity trace take (1 is default, is simple one step Q learning)')
+parser.add_argument('-en', type=int, help='(en = eligibility trace steps n) - How many steps should eligiblity trace take (1 is default, is simple one step Q learning)')
 
 args = parser.parse_args()
 
