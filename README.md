@@ -1,4 +1,7 @@
-# ai-self-driving-car
+# AI pump
+
+The objective is that the ai from python select the actions in order to meet a reference temperature set in the python code.
+The actions are up in temperature, down in temperature and the third is do nothing.
 
 # The following libraries are needed to run
 * tensorflow or keras
