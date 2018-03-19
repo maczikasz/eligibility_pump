@@ -24,8 +24,6 @@ class GameUpdater:
         if self.step == 0: #In order not to have to much communication
             self.state = self.ai_input_provider.calculate_ai_input(env_values)
             self.step += 1
-        print('actual env values is', env_values)
-        print('norm state is', self.state)
         
 		# Select action
         action = self.ai.get_next_action(self.state)
@@ -48,8 +46,6 @@ class GameUpdater:
         env_values = self.env.receiveState()
         next_state = self.ai_input_provider.calculate_ai_input(env_values)
         self.last_transitions.append(Transition(self.state, action, reward, next_state))
-        if isinstance(action, int):
-            print("Error there is an int action %i" % action)
 		# Update
         self.state = next_state
 		

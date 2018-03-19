@@ -26,12 +26,12 @@ class Dqn():
         self.fc1 = slim.fully_connected(inputs=self.input_tensor, num_outputs=30, activation_fn=tf.nn.relu, scope="fc1")
         self.fc2 = slim.fully_connected(inputs=self.fc1, num_outputs=30, activation_fn=tf.nn.relu, scope="fc2")
         self.q = slim.fully_connected(inputs=self.fc2, num_outputs=nb_action, activation_fn=None, scope="q")
-        self.softmax = slim.softmax(self.q * 70, scope="softmax")
+        self.softmax = slim.softmax(self.q * 10, scope="softmax")
         slim.summary.tensor_summary("softmax", self.softmax)
         self.chosen_action = tf.argmax(self.softmax, axis=1)
 
-        self.action = tf.placeholder(shape=[300], dtype=tf.int32)
-        self.target = tf.placeholder(shape=[300], dtype=tf.float32)
+        self.action = tf.placeholder(shape=[40], dtype=tf.int32)
+        self.target = tf.placeholder(shape=[40], dtype=tf.float32)
 
         self.hot = slim.one_hot_encoding(self.action, self.num_action, scope="one_hot")
         self.predictions = tf.reduce_sum(self.hot * self.q, axis=1)
@@ -67,7 +67,7 @@ class Dqn():
             self.input_tensor: np.array(lmap(lambda transition: transition[-1].next_state, transitions))})
 
         rewards = np.array(lmap(self.calculate_transition_reward, transitions))
-        actions = np.array(lmap(lambda transition: transition[0].action.index, transitions))
+        actions = np.array(lmap(lambda transition: transition[0].action, transitions))
         next_max_qs = next_stateQs.max(1)
         target = ((self.gamma ** len(transitions)) * next_max_qs) + rewards
 

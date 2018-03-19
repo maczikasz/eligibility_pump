@@ -54,7 +54,7 @@ class Params():
         self.gamma = 0.9
         self.ER_batch_size = 100
         self.ER_capacity = 100000
-        self.input_size = 3
+        self.input_size = 2
         self.action_size = 3
         self.goalT1 = 27
         self.goalT2 = 0
@@ -96,11 +96,14 @@ while True:
     print('------------------------------------------------')
     print('iteration ', iter)
     t0 = time.time()
+    
+    # Sleep in order to make sure Simulink and Python can have a good TCP/IP communication
+    time.sleep(0.1)
 	
-	# Nød til at sende for at Simulink fatter livet
+    # Have to send the first communication to Simulink in order to start the simulation
     env.sendAction(0)
     
-    # Update 
+    # Update brain
     training.update()
     
 	# Save brain file and plot

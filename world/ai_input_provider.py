@@ -13,4 +13,4 @@ class AiInputProvider:
         orientation_norm = (T1-self.params.goalT1)/12.5
         Tsource_norm = (Tsource - 15)/25
         
-        return [T1_norm, orientation_norm, Tsource_norm]
+        return [T1_norm, orientation_norm]
